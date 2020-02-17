@@ -1,5 +1,6 @@
 // REQUIREMENT : solve the problem using the sliding window technique
 // Sample Questions from https://www.techiedelight.com/sliding-window-problems/
+// Tutorial Used in conjunction with these problems : https://www.youtube.com/watch?v=MK-NZ4hN7rsß
 
 // Question #1
 // Find the longest substring of a given string containing k distinct characters
@@ -9,17 +10,23 @@ function distinctCharCount(s, k) {
   let longestString = '';
   let j = 0;
   for (let i = 0; i < s.length; i++) {
-    if (counts[s[i]] === null) {
-      counts[s[i]] += 1;
+    if (!counts[s[i]]) counts[s[i]] = 1;
+    else counts[s[i]]++;
+
+    if (s.substring(j, i).length > longestString.length) {
+      longestString = s.substring(j, i);
     }
+
     if (Object.keys(counts).length > k) {
-      counts[s[i]] -= 1;
+      counts[s[i]]--;
       j++;
     }
-    if (s.substring(j, i).length > longestString.length)
-      longestString = s.substring(j.i);
   }
+
+  return longestString;
 }
+
+console.log(distinctCharCount('aabbccdd', 3));
 
 // Question #2
 // Find all substrings of a string that are permutations of a given string
