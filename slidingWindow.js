@@ -72,11 +72,37 @@ function findAllSubstrings(s, k) {
   }
 }
 
-findAllSubstrings('tuckutck', 'tuck');
+//findAllSubstrings('tuckutck', 'tuck');
 
 // Question #3
 // Longest substring of given string containing distinct characters
 
+function findLongestSubstr(s) {
+  if (s.length < 2) {
+    return s;
+  }
+  let l = 0,
+    longest = '',
+    hashMap = {};
+
+  for (let r = l; r < s.length; r++) {
+    while (Object.values(hashMap).find((char) => char > 1)) {
+      //  increment l and keep r still until the condition passes
+      hashMap[s[l]] -= 1;
+      l++;
+    }
+    if (s.substring(l, r).length > longest.length) {
+      longest = s.substring(l, r);
+    }
+    // account for the character that is at this index onto the hashMap
+    if (!hashMap[s[r]]) hashMap[s[r]] = 1;
+    else hashMap[s[r]]++;
+  }
+
+  return longest;
+}
+
+findLongestSubstr('findlongestsubstring');
 // Question #4
 // Find maximum sequence of continuous 1's that can be formed by replacing at-most k zeroes by ones
 
