@@ -33,38 +33,46 @@ function distinctCharCount(s, k) {
   return longestString;
 }
 
-console.log(distinctCharCount('xyzaabbccdd', 4));
+//console.log(distinctCharCount('xyzaabbccdd', 4));
 
 // Question #2
 // Find all substrings of a string that are permutations of a given string
+
+function compareTwoObj(obj1, obj2) {
+  let arr1 = Object.entries(obj1).sort();
+  let arr2 = Object.entries(obj2).sort();
+  return JSON.stringify(arr1) == JSON.stringify(arr2);
+}
 
 function findAllSubstrings(s, k) {
   if (k.length > s.length) return false;
   let set = {};
   let window = {};
-  for (let i = 0; i < k.length + 1; i++) {
-    let charValue = set[k[i]];
-    charValue === undefined ? (charValue = 1) : (charValue += 1);
+  for (let i = 0; i < k.length; i++) {
+    if (!set[k[i]]) set[k[i]] = 1;
+    else set[k[i]]++;
   }
-  for (let j = 0; j < k.length; j++) {
-       let charValue = window[k[i]];
-   if(j < k) {
+  let l = 0;
+  for (let r = 0; r < s.length; r++) {
+    if (r < k) {
+      if (!window[s[r]]) window[s[r]] = 1;
+      else window[s[r]]++;
+    } else {
+      if (compareTwoObj(window, set)) {
+        console.log({ window, set, leftIndex: l, rightIndex: r });
+      }
 
-    charValue === undefined ? (charValue = 1) : (charValue += 1);
-   } else {
-if(window contains all the requirements of set) {
-    print out window and the current index
-}
-
-if(window contains all the required conditions even when we remove the last element) {
-    then increment the left window
-}
-
-    charValue === undefined ? (charValue = 1) : (charValue += 1);
-   }
-   
+      if (r - l + 1 > k.length) {
+        window[s[l]]--;
+        l++;
+      }
+      if (!window[s[r]]) window[s[r]] = 1;
+      else window[s[r]]++;
+    }
   }
 }
+
+findAllSubstrings('tuckutck', 'tuck');
 
 // Question #3
 // Longest substring of given string containing distinct characters
