@@ -3,6 +3,23 @@
 
 // Question #1
 // Find the longest substring of a given string containing k distinct characters
+function distinctCharCount(s, k) {
+  if (k > s.length) return s;
+  let counts = {};
+  let longestString = '';
+  let j = 0;
+  for (let i = 0; i < s.length; i++) {
+    if (counts[s[i]] === null) {
+      counts[s[i]] += 1;
+    }
+    if (Object.keys(counts).length > k) {
+      counts[s[i]] -= 1;
+      j++;
+    }
+    if (s.substring(j, i).length > longestString.length)
+      longestString = s.substring(j.i);
+  }
+}
 
 // Question #2
 // Find all substrings of a string that are permutations of a given string
