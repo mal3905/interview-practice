@@ -6,30 +6,41 @@
 // Find the longest substring of a given string containing k distinct characters
 function distinctCharCount(s, k) {
   if (k > s.length) return s;
-  let counts = {};
-  let longestString = '';
-  let j = 0;
-  for (let i = 0; i < s.length; i++) {
-    if (!counts[s[i]]) counts[s[i]] = 1;
-    else counts[s[i]]++;
 
+  let longestString = '', // used to track the length - also serves as return value
+    unique = 0, // keeps track of unique count, to check against k
+    counts = {}, // keeps track of occurence of characters, checks whether or not they are unique
+    j = 0; // this is the value well store for the right window
+  for (let i = j; i < s.length + 1; i++) {
+    // i is the left window
+    if (!counts[s[i]]) {
+      // if the character is unique
+      counts[s[i]] = 1; // set its value in the counts obj to one
+      unique++; // increment the value of unique - to check against k
+    } else counts[s[i]]++; // else increment its value in the obj 'counts'
     if (s.substring(j, i).length > longestString.length) {
+      // if the current substring being checked is greater in length then the longest string, set the longest as the current
       longestString = s.substring(j, i);
     }
-
-    if (Object.keys(counts).length > k) {
-      counts[s[i]]--;
-      j++;
+    if (unique > k) {
+      // if unique is greater than k
+      counts[s[j]]--; // decrement the count of the last character in the window
+      unique--; // decrement the count of unique
+      j++; // and increment the left window
     }
   }
 
   return longestString;
 }
 
-console.log(distinctCharCount('aabbccdd', 3));
+console.log(distinctCharCount('xyzaabbccdd', 4));
 
 // Question #2
 // Find all substrings of a string that are permutations of a given string
+
+function findAllSubstrings(s, k) {
+  if (k.length > s.length) return false;
+}
 
 // Question #3
 // Longest substring of given string containing distinct characters
