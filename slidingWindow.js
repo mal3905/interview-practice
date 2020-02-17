@@ -40,6 +40,30 @@ console.log(distinctCharCount('xyzaabbccdd', 4));
 
 function findAllSubstrings(s, k) {
   if (k.length > s.length) return false;
+  let set = {};
+  let window = {};
+  for (let i = 0; i < k.length + 1; i++) {
+    let charValue = set[k[i]];
+    charValue === undefined ? (charValue = 1) : (charValue += 1);
+  }
+  for (let j = 0; j < k.length; j++) {
+       let charValue = window[k[i]];
+   if(j < k) {
+
+    charValue === undefined ? (charValue = 1) : (charValue += 1);
+   } else {
+if(window contains all the requirements of set) {
+    print out window and the current index
+}
+
+if(window contains all the required conditions even when we remove the last element) {
+    then increment the left window
+}
+
+    charValue === undefined ? (charValue = 1) : (charValue += 1);
+   }
+   
+  }
 }
 
 // Question #3
